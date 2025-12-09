@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <!-- for dev purposes only -->
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
+<nav>
+    <ul class="navList">
+        <li>Logged in as: <span th:text="${email}"></span></li>
+    </ul>
+</nav>
 <h1>Dashboard</h1>
+<div class="dataBox">
+    <p>Total Occurrences: </p>
+</div>
+<br>
+<div class="dataBox">
+    <p>Total PTO Hrs: </p>
+</div>
 
 </body>
 </html>
