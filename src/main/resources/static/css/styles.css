@@ -8,3 +8,10 @@ display: flex;
 list-style-type: none;
 flex-direction: row;
 }
+
+.sessionErrorMessage {
+    color: red;
+    font-weight: bold;
+    background: #FFC1C3;
+
+}

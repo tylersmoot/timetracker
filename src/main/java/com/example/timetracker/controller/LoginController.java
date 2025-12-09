@@ -1,5 +1,6 @@
 package com.example.timetracker.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,9 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(RedirectAttributes redirectAttributes, @RequestParam("email") String email, @RequestParam("password") String password) {
+    public String login(HttpSession session, @RequestParam("email") String email, @RequestParam("password") String password) {
         System.out.println("Email: " + email + " " + "Pass hash: " + password);
-        redirectAttributes.addFlashAttribute("email", email);
+        session.setAttribute("loggedInEmail", email);
         return "redirect:/dashboard";
     }
 
