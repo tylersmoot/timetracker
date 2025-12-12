@@ -6,15 +6,23 @@
     <title>Login</title>
     <link rel="stylesheet" href="/static/css/styles.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: end;
+        }
+    </style>
 </head>
 <body>
+<span style="position: absolute; top: 5px;">TimeTracker</span>
 <nav>
     <ul>
         <li><a th:href="@{/}">Back</a></li>
     </ul>
 </nav>
 
-<h2>TimeTracker Login</h2>
+<h2>Login</h2>
 
 <form th:action="@{/login}" method="post">
     <label>Email</label>

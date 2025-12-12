@@ -1,11 +1,14 @@
 package com.example.timetracker.model;
 
+import com.example.timetracker.model.enums.TimeRequestStatus;
 import com.example.timetracker.model.enums.TimeType;
 import jakarta.persistence.*;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Entity
 public class TimeRequest {
@@ -24,6 +27,15 @@ public class TimeRequest {
     private double occurrenceCount;
     @Column
     private String createdAt;
+    @Column
+    TimeRequestStatus timeRequestStatus;
+
+    public TimeRequestStatus getTimeRequestStatus() {
+        return timeRequestStatus;
+    }
+    public void setTimeRequestStatus(TimeRequestStatus timeRequestStatus) {
+        this.timeRequestStatus = timeRequestStatus;
+    }
 
 
     public String getCreatedAt() {
@@ -32,7 +44,7 @@ public class TimeRequest {
 
     public void setCreatedAt() {
         LocalDate tempTime = LocalDate.now();
-        DateTimeFormatter formattedTempTime = DateTimeFormatter.ofPattern("dd-MM-yyy");
+        DateTimeFormatter formattedTempTime = DateTimeFormatter.ofPattern("MM-dd-yyyy");
         this.createdAt = tempTime.format(formattedTempTime);
 
     }
@@ -59,7 +71,9 @@ public class TimeRequest {
     }
 
     public void setRequestedDate(String requestedDate) {
-        this.requestedDate = requestedDate;
+       LocalDate localDate = LocalDate.parse(requestedDate);
+       DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+       this.requestedDate = localDate.format(dateTimeFormatter);
     }
 
     public double getRequestedHours() {

@@ -1,6 +1,7 @@
 package com.example.timetracker.controller;
 
 import com.example.timetracker.model.TimeRequest;
+import com.example.timetracker.model.enums.TimeRequestStatus;
 import com.example.timetracker.model.enums.TimeType;
 import com.example.timetracker.service.TimeRequestService;
 import jakarta.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Time;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -51,6 +53,7 @@ public class DashboardController {
 
         TimeType type = TimeType.valueOf(timeType);
 
+
         System.out.println("Attempting to save time request to database....");
         TimeRequest timeRequest = new TimeRequest();
         timeRequest.setTimeType(type);
@@ -58,6 +61,7 @@ public class DashboardController {
         timeRequest.setRequestedHours(requestHours);
         timeRequest.setOccurrenceCount(occurrenceCount);
         timeRequest.setCreatedAt();
+        timeRequest.setTimeRequestStatus(TimeRequestStatus.PENDING);
         timeRequestService.saveTimeRequest(timeRequest);
         System.out.println("Time request saved....");
 

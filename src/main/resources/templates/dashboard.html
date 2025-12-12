@@ -13,34 +13,62 @@
         nav ul {
             list-style-type: none;
             display: flex;
-            justify-content: space-between;
+            justify-content: end;
         }
         table {
             border: 1px solid black;
+            width: 95%;
+        }
+        table tr {
+            border: 1px solid black;
+        }
+        table tr td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        .dataBox {
+            height: 40px;
+            background: #D1FFBD;
+            color: green;
+            border: 1px solid green;
+            width: 50%;
+        }
+        .loggedInUserBanner {
+            background: #FFFDAF;
         }
     </style>
 </head>
 <body>
+<span style="position: absolute; top: 5px;">TimeTracker</span>
 <nav>
     <ul>
-        <li>Logged in as: <span th:text="${loggedInEmail}"></span></li>
         <li><a th:href="@{/logout}">Log out</a></li>
     </ul>
 </nav>
+<div class="loggedInUserBanner">
+<small>Logged in as: <span th:text="${loggedInEmail}"></span></small>
+</div>
 <h1>Dashboard</h1>
 
-<button id="timeReqBtn" type="button" data-bs-toggle="modal" data-bs-target="#timeReqModal">Submit Request</button>
-
-
+<div class="container">
+    <div class="row">
 <div class="dataBox">
-    <p>Total Occurrences: </p>
+    <p>Occ Balance:</p>
 </div>
-<br>
 <div class="dataBox">
-    <p>Total PTO Hrs: </p>
+    <p>PTO Balance: </p>
+</div>
+        </div>
 </div>
 
 
+
+
+<div class="tableContainer">
+    <h2>Requests</h2>
+    <div>
+        <button id="timeReqBtn" type="button" data-bs-toggle="modal" data-bs-target="#timeReqModal">Submit Request</button>
+    </div>
 <table>
     <tr>
         <td>Id</td>
@@ -49,6 +77,7 @@
         <td>Date</td>
         <td>Hrs</td>
         <td>Type</td>
+        <td>Status</td>
     </tr>
     <tr th:each="request : ${allTimeRequests}">
         <td th:text="${request.getId()}"></td>
@@ -57,10 +86,11 @@
         <td th:text="${request.getRequestedDate()}"></td>
         <td th:text="${request.getRequestedHours()}"></td>
         <td th:text="${request.getTimeType()}"></td>
+        <td th:text="${request.getTimeRequestStatus()}"></td>
     </tr>
 
 </table>
-
+</div>
 
 
 <!-- time request form popup modal -->
@@ -89,16 +119,15 @@
                    <input type="number" placeholder="ex: 10.0" name="requestHours" required>
                    <br>
                    <br>
-                   <label>Occurence Count</label>
+                   <label>Occ Count</label>
                    <select name="occurrenceCount">
-                       <option value="default">Choose occurrence count</option>
+                       <option value="default">Occ #</option>
                        <option value="0.0">0.0</option>
                        <option value="0.25">0.25</option>
                        <option value="0.5">0.5</option>
                        <option value="0.75">0.75</option>
                        <option value="1.0">1.0</option>
                    </select>
-                   <input type="hidden" value=
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
