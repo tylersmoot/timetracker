@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
+
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <!-- for dev purposes only -->
-    <link rel="stylesheet" href="/static/css/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
+    <style>
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-between;
+        }
+        table {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
 <nav>
-    <ul class="navList">
+    <ul>
         <li>Logged in as: <span th:text="${loggedInEmail}"></span></li>
+        <li><a th:href="@{/logout}">Log out</a></li>
     </ul>
 </nav>
 <h1>Dashboard</h1>
@@ -29,23 +40,27 @@
     <p>Total PTO Hrs: </p>
 </div>
 
-<div class="dataTable">
-<table>
-    <thead>
-    <tr>
-        <td>Time Type</td>
-        <td>Date</td>
-        <td>Hours</td>
-        <td>Occurrence #</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
 
+<table>
+    <tr>
+        <td>Id</td>
+        <td>Created at</td>
+        <td>Occ</td>
+        <td>Date</td>
+        <td>Hrs</td>
+        <td>Type</td>
     </tr>
-    </tbody>
+    <tr th:each="request : ${allTimeRequests}">
+        <td th:text="${request.getId()}"></td>
+        <td th:text="${request.getCreatedAt()}"></td>
+        <td th:text="${request.getOccurrenceCount()}"></td>
+        <td th:text="${request.getRequestedDate()}"></td>
+        <td th:text="${request.getRequestedHours()}"></td>
+        <td th:text="${request.getTimeType()}"></td>
+    </tr>
+
 </table>
-</div>
+
 
 
 <!-- time request form popup modal -->
@@ -94,21 +109,6 @@
     </div>
 </div>
 </div>
-
-
-<table>
-    <thead>
-    <tr>
-        <td>Id</td>
-        <td>Created at</td>
-        <td>Occurence count</td>
-        <td>Requested date</td>
-        <td>Requested hours</td>
-        <td>Time type</td>
-    </tr>
-    </thead>
-</table>
-
 
 
 

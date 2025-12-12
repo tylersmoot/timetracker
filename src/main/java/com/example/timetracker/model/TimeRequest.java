@@ -3,6 +3,7 @@ package com.example.timetracker.model;
 import com.example.timetracker.model.enums.TimeType;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -30,8 +31,8 @@ public class TimeRequest {
     }
 
     public void setCreatedAt() {
-        LocalDateTime tempTime = LocalDateTime.now();
-        DateTimeFormatter formattedTempTime = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm:ss");
+        LocalDate tempTime = LocalDate.now();
+        DateTimeFormatter formattedTempTime = DateTimeFormatter.ofPattern("dd-MM-yyy");
         this.createdAt = tempTime.format(formattedTempTime);
 
     }

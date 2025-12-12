@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
-     <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <!-- for dev purposes only -->
     <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
+<nav>
+    <ul>
+        <li><a th:href="@{/}">Back</a></li>
+    </ul>
+</nav>
+
 <h2>TimeTracker Login</h2>
 
 <form th:action="@{/login}" method="post">
@@ -18,10 +23,13 @@
     <br>
     <label>Password</label>
     <input type="password" name="password">
-    <button type="submit">Login</button>
-    <input type="reset">
+    <div>
+        <button type="submit">Login</button>
+        <input type="reset">
+    </div>
 </form>
 
+<div id="logoutConfirmationMessage" th:if="${logoutConfirmationMessage}" th:text="${logoutConfirmationMessage}"></div>
 <p class="sessionErrorMessage" th:if="${sessionError}" th:text="${sessionError}"></p>
 
 </body>

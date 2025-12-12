@@ -62,7 +62,7 @@ public class DashboardController {
         System.out.println("Time request saved....");
 
         List<TimeRequest> allTimeRequests = timeRequestService.getAllTimeRequests();
-        session.setAttribute("allTimeRequests", allTimeRequests);
-        return "redirect:/dashboard";
+        model.addAttribute("allTimeRequests", allTimeRequests);
+        return "dashboard";
     }
 }

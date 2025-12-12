@@ -1,17 +1,31 @@
-body {
+* {
     margin: 0;
     padding: 0;
-}
-
-.navList {
-display: flex;
-list-style-type: none;
-flex-direction: row;
 }
 
 .sessionErrorMessage {
     color: red;
     font-weight: bold;
     background: #FFC1C3;
+}
+#logoutConfirmationMessage {
+    color: green;
+    font-weight: bold;
+    background: #D1FFBD;
 
 }
+
+#requestTable {
+    border: 1px solid black;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    flex-direction: row;
+}
+
+nav ul li {
+    padding: 5px;
+}
+

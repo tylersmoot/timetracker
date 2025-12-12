@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/static/css/indexStyles.css">
+  <link rel="stylesheet" th:href="@{/css/indexStyles.css}">
+  <title>Time Tracker</title>
+</head>
+<body>
+
+<span style="position: absolute; top: 5px;">TimeTracker</span>
+<nav>
+<ul>
+  <li><a th:href="@{/login}">Log In</a></li>
+  <li><a href="">Sign Up</a></li>
+</ul>
+</nav>
+
+</body>
+</html>
