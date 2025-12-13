@@ -1,5 +1,6 @@
 package com.example.timetracker.model;
 
+import com.example.timetracker.model.enums.Role;
 import com.example.timetracker.model.enums.TimeRequestStatus;
 import com.example.timetracker.model.enums.TimeType;
 import jakarta.persistence.*;
@@ -29,6 +30,7 @@ public class TimeRequest {
     private String createdAt;
     @Column
     TimeRequestStatus timeRequestStatus;
+
 
     public TimeRequestStatus getTimeRequestStatus() {
         return timeRequestStatus;

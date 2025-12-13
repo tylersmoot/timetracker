@@ -3,15 +3,15 @@ package com.example.timetracker.model;
 import com.example.timetracker.model.enums.Role;
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "app_users")
-public class User {
+import java.time.LocalDate;
 
+@Entity
+public class Administrator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column
-    private String firstName;
+    private String firstname;
     @Column
     private String lastName;
     @Column
@@ -19,16 +19,10 @@ public class User {
     @Column
     private String passHash;
     @Column
+    private LocalDate accountCreatedAt;
+    @Column
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = Role.ROLE_USER;
-    }
 
     public int getId() {
         return id;
@@ -38,12 +32,12 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getLastName() {
@@ -70,5 +64,19 @@ public class User {
         this.passHash = passHash;
     }
 
+    public LocalDate getAccountCreatedAt() {
+        return accountCreatedAt;
+    }
 
+    public void setAccountCreatedAt(LocalDate accountCreatedAt) {
+        this.accountCreatedAt = accountCreatedAt;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = Role.ROLE_ADMINISTRATOR;
+    }
 }

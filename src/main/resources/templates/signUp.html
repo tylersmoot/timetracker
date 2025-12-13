@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: end;
+        }
+
+    </style>
+</head>
+<body>
+<span style="position: absolute; top: 5px;">TimeTracker</span>
+<nav>
+    <ul>
+        <li><a th:href="@{/login}">Back</a></li>
+    </ul>
+</nav>
+
+
+<h2>Sign Up</h2>
+<form th:action="@{/sign-up}" method="post">
+    <label>First name</label>
+    <input type="text" name="firstName">
+    <br>
+    <label>Last name</label>
+    <input type="text" name="lastName">
+    <br>
+    <label>Email</label>
+    <input type="email" name="email">
+    <br>
+    <label>Role</label>
+    <select name="roleType">
+        <option value="default">Role type</option>
+        <option value="user">User</option>
+        <option value="administrator">Administrator</option>
+    </select>
+    <br>
+    <label>Choose password</label>
+    <input type="password" name="password">
+    <br>
+    <label>Re-type password</label>
+    <input type="password" name="retypePassword">
+    <br>
+    <br>
+    <div>
+        <button type="submit">Create account</button>
+        <input type="reset">
+    </div>
+</form>
+
+
+
+
+<div id="logoutConfirmationMessage" th:if="${logoutConfirmationMessage}" th:text="${logoutConfirmationMessage}"></div>
+<p class="sessionErrorMessage" th:if="${sessionError}" th:text="${sessionError}"></p>
+
+</body>
+</html>
