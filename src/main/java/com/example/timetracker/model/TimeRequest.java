@@ -30,6 +30,17 @@ public class TimeRequest {
     private String createdAt;
     @Column
     TimeRequestStatus timeRequestStatus;
+    @Column
+    String createdBy;
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
 
 
     public TimeRequestStatus getTimeRequestStatus() {

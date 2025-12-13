@@ -17,7 +17,7 @@ public class AppUser {
     @Column
     private String email;
     @Column
-    private String passHash;
+    private String password;
     @Column
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -62,12 +62,12 @@ public class AppUser {
         this.email = email;
     }
 
-    public String getPassHash() {
-        return passHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassHash(String passHash) {
-        this.passHash = passHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 

@@ -1,29 +1,27 @@
 package com.example.timetracker.model;
 
 import com.example.timetracker.model.enums.Role;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.RollbackException;
+import jakarta.persistence.*;
 
-@Entity
+
 public class SignUpRequest {
-    @Id
-    private int id;
+
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private String retypePassword;
-    private Role role;
+    private Role roleType;
 
-    public SignUpRequest(String firstName, String lastName, String email, String password, String retypePassword, Role role) {
+    public SignUpRequest () {};
+
+    public SignUpRequest(String firstName, String lastName, String email, String password, String retypePassword, Role roleType) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.retypePassword = retypePassword;
-        this.role = role;
+        this.roleType = roleType;
     }
 
     public String getFirstName() {
@@ -66,12 +64,12 @@ public class SignUpRequest {
         this.retypePassword = retypePassword;
     }
 
-    public Role getRole() {
-        return role;
+    public Role getRoleType() {
+        return roleType;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleType(Role roleType) {
+        this.roleType = roleType;
     }
 
 }
