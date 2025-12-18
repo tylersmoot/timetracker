@@ -37,7 +37,7 @@ public class DashboardController {
     }
 
     @PostMapping("/dashboard")
-    public String saveTimeOffRequest(HttpSession session, Model model, @RequestParam("timeType")String timeType, @RequestParam("requestDate") String requestDate, @RequestParam("requestHours") double requestHours, @RequestParam("occurrenceCount") double occurrenceCount) {
+    public String saveTimeOffRequest(HttpSession session, Model model, @RequestParam("timeType")String timeType, @RequestParam("requestDate") String requestDate, @RequestParam("requestHours") double requestHours, @RequestParam("occurrenceCount") double occurrenceCount, @RequestParam("approvalStatus") String approvalStatus) {
 
         String loggedInEmail = (String) session.getAttribute("loggedInEmail");
         model.addAttribute("loggedInEmail", loggedInEmail);
@@ -57,7 +57,8 @@ public class DashboardController {
         timeRequest.setRequestedHours(requestHours);
         timeRequest.setOccurrenceCount(occurrenceCount);
         timeRequest.setCreatedAt();
-        timeRequest.setTimeRequestStatus(TimeRequestStatus.PENDING);
+        TimeRequestStatus timeRequestStatus = TimeRequestStatus.valueOf(approvalStatus);
+        timeRequest.setTimeRequestStatus(timeRequestStatus);
         timeRequest.setCreatedBy(loggedInEmail);
         timeRequestService.saveTimeRequest(timeRequest);
         System.out.println("Time request saved....");

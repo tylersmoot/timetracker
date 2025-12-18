@@ -93,7 +93,7 @@
     </ul>
 </nav>
 <div class="loggedInUserBanner">
-<small>Logged in as: <span th:text="${loggedInEmail}"></span><span th:text="${appUserId}"></span><span>(role)</span></small>
+<small>Logged in as: <span th:text="${loggedInEmail}"></span><span th:text="${appUserId}"></span></small>
 </div>
 <h1>Dashboard</h1>
 
@@ -186,14 +186,14 @@
                    <br>
                    <br>
                    <div id="supApprovalContainer">
-                       <label class="message">**Has this been approved by a supervisor?</label>
+                       <label class="message">**Has this request been approved by a supervisor?</label>
                        <select id="supApprovalInput" name="supApproval">
                            <option value="default">Choose</option>
                            <option value="Yes">Yes</option>
                            <option value="No">No</option>
                        </select>
                    </div>
-                   <input type="hidden" name="approvalStatus" value="PENDING">
+                   <input type="hidden" id="approvalStatus" name="approvalStatus" value="PENDING">
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -228,10 +228,12 @@
     let supApprovalInput = document.querySelector("#supApprovalInput");
     let supApprovalStatus = document.querySelector("#approvalStatus");
     supApprovalInput.addEventListener("input", function() {
-       if(supApprovalInput == "Yes") {
-            supApprovalStatus.value = "APPROVED";
-       } 
 
+        if(supApprovalInput.value === "Yes") {
+           supApprovalStatus.value = "APPROVED";
+        } else {
+           supApprovalStatus.value = "PENDING";
+           }
     });
 
 
