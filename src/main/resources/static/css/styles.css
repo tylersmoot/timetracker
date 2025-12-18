@@ -8,12 +8,13 @@
     font-weight: bold;
     background: #FFC1C3;
 }
-#logoutConfirmationMessage {
+#logoutConfirmationMessage, #newUserSuccessMessage {
     color: green;
     font-weight: bold;
     background: #D1FFBD;
 
 }
+
 
 #requestTable {
     border: 1px solid black;

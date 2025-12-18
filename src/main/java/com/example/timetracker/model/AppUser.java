@@ -1,10 +1,11 @@
 package com.example.timetracker.model;
 
+import com.example.timetracker.model.enums.Role;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "app_users")
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +17,29 @@ public class User {
     @Column
     private String email;
     @Column
-    private String passHash;
+    private String password;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Role role;
+    @Column
+    double occurrenceBalance;
+
+    public double getOccurrenceBalance() {
+        return occurrenceBalance;
+    }
+
+    public void setOccurrenceBalance(double occurrenceBalance) {
+        this.occurrenceBalance = occurrenceBalance;
+    }
+
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public int getId() {
         return id;
@@ -50,12 +73,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPassHash() {
-        return passHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassHash(String passHash) {
-        this.passHash = passHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 

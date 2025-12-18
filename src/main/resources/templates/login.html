@@ -38,6 +38,7 @@
 </form>
 
 <div id="logoutConfirmationMessage" th:if="${logoutConfirmationMessage}" th:text="${logoutConfirmationMessage}"></div>
+<div th:if="${newUserSuccessMessage}" th:text="${newUserSuccessMessage}"></div>
 <p class="sessionErrorMessage" th:if="${sessionError}" th:text="${sessionError}"></p>
 
 </body>

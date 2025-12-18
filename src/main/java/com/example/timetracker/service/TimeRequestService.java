@@ -13,8 +13,6 @@ public class TimeRequestService {
     @Autowired
     private TimeRequestRepository timeRequestRepository;
 
-
-
     public void saveTimeRequest(TimeRequest timeRequest) {
         timeRequestRepository.save(timeRequest);
     }
