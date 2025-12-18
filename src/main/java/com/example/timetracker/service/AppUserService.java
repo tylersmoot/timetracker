@@ -12,6 +12,9 @@ public class AppUserService {
     @Autowired
     private AppUserRepository appUserRepository;
 
+    public AppUserService(){};
+
+
     public AppUser findByEmail(String email){
         return appUserRepository.findByEmail(email);
     }

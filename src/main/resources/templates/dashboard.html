@@ -17,24 +17,50 @@
         }
         table {
             border: 1px solid black;
-            width: 95%;
         }
         table tr {
             border: 1px solid black;
         }
         table tr td {
             border: 1px solid black;
-            padding: 10px;
+
         }
         .dataBox {
-            height: 40px;
-            background: #D1FFBD;
-            color: green;
-            border: 1px solid green;
+            height: 10vh;
+            background: #1E90FF;
+            color: white;
             width: 50%;
+            border: 2px solid white;
         }
         .loggedInUserBanner {
-            background: #FFFDAF;
+            background: linear-gradient(to right, #1E90FF, #004687);
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+        }
+        .balanceNum {
+            font-size: 32px;
+        }
+        #timeReqBtn {
+            background: white;
+            border: 2px solid #1E90FF;
+            border-radius: 10px;
+            color: #1E90FF;
+            font-weight: bold;
+            padding: 5px 15px 5px 15px;
+        }
+        #timeReqBtn:hover {
+            background: #1E90FF;
+            color: white;
+            font-weight: bold;
+        }
+        #modalSubmitBtn {
+            background: #1E90FF;
+            border: 2px solid #1E90FF;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            padding: 5px 15px 5px 15px;
         }
     </style>
 </head>
@@ -53,10 +79,12 @@
 <div class="container">
     <div class="row">
 <div class="dataBox">
-    <p>Occ Balance:</p>
+    <p>Occ Balance </p>
+    <div class="balanceNum" th:text="${appUser.getOccurrenceBalance()}">8.0</div>
 </div>
 <div class="dataBox">
-    <p>PTO Balance: </p>
+    <p>PTO Balance </p>
+    <div class="balanceNum">200.0</div>
 </div>
         </div>
 </div>
@@ -131,7 +159,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" id="modalSubmitBtn">Submit</button>
             </div>
                </form>
         </div>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SignUpService {
 
+
     @Autowired
     private AppUserService appUserService;
 
@@ -27,6 +28,7 @@ public void registerNewUser(SignUpRequest signUpRequest) {
     if(signUpRequest.getRoleType() == Role.USER) {
         appUser.setRole(Role.USER);
     }
+    appUser.setOccurrenceBalance(8.0);
 
     // save new app user
     appUserService.saveUser(appUser);

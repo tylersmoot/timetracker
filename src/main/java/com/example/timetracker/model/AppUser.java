@@ -21,6 +21,17 @@ public class AppUser {
     @Column
     @Enumerated(EnumType.STRING)
     private Role role;
+    @Column
+    double occurrenceBalance;
+
+    public double getOccurrenceBalance() {
+        return occurrenceBalance;
+    }
+
+    public void setOccurrenceBalance(double occurrenceBalance) {
+        this.occurrenceBalance = occurrenceBalance;
+    }
+
 
     public Role getRole() {
         return role;

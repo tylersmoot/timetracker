@@ -1,15 +1,11 @@
 package com.example.timetracker.model;
 
-import com.example.timetracker.model.enums.Role;
 import com.example.timetracker.model.enums.TimeRequestStatus;
 import com.example.timetracker.model.enums.TimeType;
 import jakarta.persistence.*;
-import lombok.Setter;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+
 
 @Entity
 public class TimeRequest {
@@ -29,6 +25,7 @@ public class TimeRequest {
     @Column
     private String createdAt;
     @Column
+    @Enumerated(EnumType.STRING)
     TimeRequestStatus timeRequestStatus;
     @Column
     String createdBy;
