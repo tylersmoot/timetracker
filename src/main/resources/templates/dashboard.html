@@ -104,11 +104,11 @@
     <div class="row">
 <div class="dataBox">
     <p>Occ Balance </p>
-    <div class="balanceNum" th:text="${appUser.getOccurrenceBalance()}">8.0</div>
+    <div class="balanceNum" th:text="${appUser.getOccurrenceBalance()}"></div>
 </div>
 <div class="dataBox">
     <p>PTO Balance </p>
-    <div class="balanceNum">200.0</div>
+    <div class="balanceNum" th:text="${appUser.getYearlyAssignedPtoBalance()}"></div>
 </div>
         </div>
 </div>
