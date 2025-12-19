@@ -5,7 +5,7 @@ The app keeps everything simple: </h2>
 
 <ul>
   <li>Employees submit time-off requests</li>
-  <li>Admins review scheduled and unscheduled time off</li>
+  <li>App users can view and change the status of all time-off requests (pending, approved, or cancelled)</li>
   <li>System automatically tracks point-based attendance</li>
   <li>PTO hours are tracked and deducted from the employee’s balance</li>
 </ul>
