@@ -15,17 +15,54 @@
         }
         .mainBody {
             height: 100vh;
+            padding: 5px 20px 5px 20px;
+            background: #1E90FF;
+        }
+        .formBody {
+            border: none;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            box-shadow: 2px 2px 5px lightgray;
+        }
+
+        input, select {
+            border: 2px solid #1E90FF;
+            padding: 5px;
+            width: 75%;
+            border-radius: 10px;
+            box-shadow: 4px 6px 5px lightgray;
+        }
+        .emailInput {
+            width: 75%;
+            box-shadow: 4px 6px 5px lightgray;
+        }
+        h2 {
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
         }
         .modalSubmitBtn {
-         background: #1E90FF;
+            background: #1E90FF;
             border: 2px solid #1E90FF;
             border-radius: 10px;
             color: white;
             font-weight: bold;
             padding: 5px 15px 5px 15px;
+            box-shadow: 4px 6px 5px lightgray;
         }
-
-
+        .modalResetBtn {
+            background: white;
+            border: 2px solid #1E90FF;
+            border-radius: 10px;
+            color: #1E90FF;
+            font-weight: bold;
+            padding: 5px 15px 5px 15px;
+            box-shadow: 4px 6px 5px lightgray;
+        }
     </style>
 </head>
 <body>
@@ -37,42 +74,45 @@
 </nav>
 
 <div class="mainBody">
-
-<h2>Sign Up</h2>
+    <h2>Sign Up</h2>
+<div class="formBody">
 <form th:action="@{/sign-up}" method="post">
     <label>First name</label>
     <br>
-    <input type="text" name="firstName">
+    <input type="text" name="firstName" placeholder="First name">
     <br>
     <label>Last name</label>
     <br>
-    <input type="text" name="lastName">
+    <input type="text" name="lastName" placeholder="Last name">
     <br>
     <label>Email</label>
     <br>
-    <input type="email" name="email">
-    <br>
-    <label>Role</label>
-    <br>
-    <select name="roleType">
-        <option value="default">Role type</option>
-        <option value="USER">User</option>
-        <option value="ADMINISTRATOR">Administrator</option>
-    </select>
+    <input type="email" name="email" class="emailInput">
     <br>
     <br>
-    <label>Choose password</label>
+    <label>How many PTO Hours are you assigned per year?</label>
+    <br>
+    <input type="number" name="yearlyAssignedPtoBalance" placeholder="EX: 196">
+    <br>
+    <label>What is your current available PTO balance?</label>
+    <br>
+    <input type="number" name="ptoBalance" placeholder="EX: 136">
+    <br>
+    <br>
+    <!-- NEW INPUTS HERE - get current occurence balance && yearly assigned occurences (sick days) -->
+
+    <label>Choose a password</label>
     <br>
     <input type="password" name="password">
     <br>
     <label>Re-type password</label>
     <br>
-    <input type="password" name="retypePassword">
+    <input type="password" name="retypedPassword">
     <br>
     <br>
     <div>
         <button type="button" data-bs-target="#confirmFormDetailsModal" data-bs-toggle="modal" class="modalSubmitBtn">Create account</button>
-        <input type="reset">
+        <button type="reset" class="modalResetBtn">Reset</button>
     </div>
 
     <!-- confirm form details modal -->
@@ -94,10 +134,8 @@
         </div>
     </div>
 </form>
-
-
-
-</div>
+</div> <!-- end of form body -->
+</div> <!-- end of main body -->
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

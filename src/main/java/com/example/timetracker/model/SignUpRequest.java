@@ -9,19 +9,22 @@ public class SignUpRequest {
     private String firstName;
     private String lastName;
     private String email;
+    private double yearlyAssignedPtoBalance;
+    private double ptoBalance;
     private String password;
-    private String retypePassword;
-    private Role roleType;
+    private String retypedPassword;
 
     public SignUpRequest () {};
 
-    public SignUpRequest(String firstName, String lastName, String email, String password, String retypePassword, Role roleType) {
+    public SignUpRequest(String firstName, String lastName, String email, double yearlyAssignedPtoBalance, double ptoBalance, String password, String retypedPassword) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.yearlyAssignedPtoBalance = yearlyAssignedPtoBalance;
+        this.ptoBalance = ptoBalance;
         this.password = password;
-        this.retypePassword = retypePassword;
-        this.roleType = roleType;
+        this.retypedPassword = retypedPassword;
+
     }
 
     public String getFirstName() {
@@ -48,6 +51,22 @@ public class SignUpRequest {
         this.email = email;
     }
 
+    public double getYearlyAssignedPtoBalance() {
+        return yearlyAssignedPtoBalance;
+    }
+
+    public void setYearlyAssignedPtoBalance(double yearlyAssignedPtoBalance) {
+        this.yearlyAssignedPtoBalance = yearlyAssignedPtoBalance;
+    }
+
+    public double getPtoBalance() {
+        return ptoBalance;
+    }
+
+    public void setPtoBalance(double ptoBalance) {
+        this.ptoBalance = ptoBalance;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -57,19 +76,12 @@ public class SignUpRequest {
     }
 
     public String getRetypePassword() {
-        return retypePassword;
+        return retypedPassword;
     }
 
     public void setRetypePassword(String retypePassword) {
-        this.retypePassword = retypePassword;
+        this.retypedPassword = retypePassword;
     }
 
-    public Role getRoleType() {
-        return roleType;
-    }
-
-    public void setRoleType(Role roleType) {
-        this.roleType = roleType;
-    }
 
 }

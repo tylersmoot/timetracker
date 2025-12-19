@@ -20,14 +20,9 @@ public void registerNewUser(SignUpRequest signUpRequest) {
     appUser.setFirstName(signUpRequest.getFirstName());
     appUser.setLastName(signUpRequest.getLastName());
     appUser.setEmail(signUpRequest.getEmail());
+    appUser.setYearlyAssignedPtoBalance(signUpRequest.getYearlyAssignedPtoBalance());
+    appUser.setPtoBalance(signUpRequest.getPtoBalance());
     appUser.setPassword(signUpRequest.getPassword());
-
-    if(signUpRequest.getRoleType() == Role.ADMINISTRATOR) {
-        appUser.setRole(Role.ADMINISTRATOR);
-    }
-    if(signUpRequest.getRoleType() == Role.USER) {
-        appUser.setRole(Role.USER);
-    }
     appUser.setOccurrenceBalance(8.0);
 
     // save new app user

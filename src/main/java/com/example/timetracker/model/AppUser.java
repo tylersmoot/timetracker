@@ -19,10 +19,27 @@ public class AppUser {
     @Column
     private String password;
     @Column
-    @Enumerated(EnumType.STRING)
-    private Role role;
-    @Column
     double occurrenceBalance;
+    @Column
+    double ptoBalance;
+    @Column
+    double yearlyAssignedPtoBalance;
+
+    public double getYearlyAssignedPtoBalance() {
+        return yearlyAssignedPtoBalance;
+    }
+
+    public void setYearlyAssignedPtoBalance(double yearlyAssignedPtoBalance) {
+        this.yearlyAssignedPtoBalance = yearlyAssignedPtoBalance;
+    }
+
+    public double getPtoBalance() {
+        return ptoBalance;
+    }
+
+    public void setPtoBalance(double ptoBalance) {
+        this.ptoBalance = ptoBalance;
+    }
 
     public double getOccurrenceBalance() {
         return occurrenceBalance;
@@ -32,14 +49,6 @@ public class AppUser {
         this.occurrenceBalance = occurrenceBalance;
     }
 
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     public int getId() {
         return id;
