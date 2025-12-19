@@ -3,6 +3,7 @@ package com.example.timetracker.service;
 import com.example.timetracker.model.TimeRequest;
 import com.example.timetracker.repository.TimeRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

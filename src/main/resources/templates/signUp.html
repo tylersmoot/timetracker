@@ -13,6 +13,18 @@
             display: flex;
             justify-content: end;
         }
+        .mainBody {
+            height: 100vh;
+        }
+        .modalSubmitBtn {
+         background: #1E90FF;
+            border: 2px solid #1E90FF;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            padding: 5px 15px 5px 15px;
+        }
+
 
     </style>
 </head>
@@ -24,34 +36,42 @@
     </ul>
 </nav>
 
+<div class="mainBody">
 
 <h2>Sign Up</h2>
 <form th:action="@{/sign-up}" method="post">
     <label>First name</label>
+    <br>
     <input type="text" name="firstName">
     <br>
     <label>Last name</label>
+    <br>
     <input type="text" name="lastName">
     <br>
     <label>Email</label>
+    <br>
     <input type="email" name="email">
     <br>
     <label>Role</label>
+    <br>
     <select name="roleType">
         <option value="default">Role type</option>
         <option value="USER">User</option>
         <option value="ADMINISTRATOR">Administrator</option>
     </select>
     <br>
+    <br>
     <label>Choose password</label>
+    <br>
     <input type="password" name="password">
     <br>
     <label>Re-type password</label>
+    <br>
     <input type="password" name="retypePassword">
     <br>
     <br>
     <div>
-        <button type="button" data-bs-target="#confirmFormDetailsModal" data-bs-toggle="modal">Create account</button>
+        <button type="button" data-bs-target="#confirmFormDetailsModal" data-bs-toggle="modal" class="modalSubmitBtn">Create account</button>
         <input type="reset">
     </div>
 
@@ -64,24 +84,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Do you want to continue with this information?</p>
+                    <p>Do you want to sign up with this information?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="modalSubmitBtn">Submit</button>
                 </div>
             </div>
         </div>
     </div>
-
-
 </form>
 
 
 
-
-<div id="logoutConfirmationMessage" th:if="${logoutConfirmationMessage}" th:text="${logoutConfirmationMessage}"></div>
-<p class="sessionErrorMessage" th:if="${sessionError}" th:text="${sessionError}"></p>
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
