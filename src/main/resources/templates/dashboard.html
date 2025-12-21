@@ -18,8 +18,11 @@
             width: 100%;
         }
         table thead tr {
-            background: #D3D3D3;
-            color: black;
+            background: #1E90FF;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px black;
+            height: 6vh;
         }
         .dataBox {
             height: 10vh;
@@ -113,11 +116,11 @@
     <h2>Balances</h2>
     <div class="row d-flex justify-content-evenly">
 <div class="dataBox">
-    <p>Occ Balance </p>
+    <p>Occurrences</p>
     <div class="balanceNum" th:text="${appUser.getOccurrenceBalance()}"></div>
 </div>
 <div class="dataBox">
-    <p>PTO Balance </p>
+    <p>PTO</p>
     <div class="balanceNum" th:text="${appUser.getYearlyAssignedPtoBalance()}"></div>
 </div>
         </div>
