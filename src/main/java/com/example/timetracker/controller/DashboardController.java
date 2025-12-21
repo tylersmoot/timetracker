@@ -31,6 +31,8 @@ public class DashboardController {
             return "redirect:/login";
         }
         AppUser appUser = (AppUser) session.getAttribute("appUser");
+        List<TimeRequest> allTimeRequests = timeRequestService.getAllTimeRequests();
+        model.addAttribute("allTimeRequests", allTimeRequests);
         model.addAttribute("appUser", appUser);
         model.addAttribute("loggedInEmail", session.getAttribute("loggedInEmail"));
         return "dashboard";

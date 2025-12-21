@@ -15,29 +15,33 @@
             justify-content: end;
         }
         table {
-            border: 1px solid black;
             width: 100%;
         }
         table thead tr {
             background: #D3D3D3;
             color: black;
         }
-
         .dataBox {
             height: 10vh;
             background: #1E90FF;
             color: white;
-            width: 50%;
-            border: 2px solid white;
+            width: 45%;
+            border-radius: 5px;
+            text-shadow: 1px 1px black;
+            font-weight: bold;
         }
         .loggedInUserBanner {
             background: linear-gradient(to right, #1E90FF, #004687);
             color: white;
             font-weight: bold;
             padding: 10px;
+            text-shadow: 1px 1px black;
         }
         .balanceNum {
             font-size: 32px;
+        }
+        h2 {
+            margin-top: 20px;
         }
         #timeReqBtn {
             background: white;
@@ -46,9 +50,6 @@
             color: #1E90FF;
             font-weight: bold;
             padding: 5px 15px 5px 15px;
-            float: right;
-            position: relative;
-            right: 150px;
         }
         #timeReqBtn:hover {
             background: #1E90FF;
@@ -64,11 +65,15 @@
             padding: 5px 15px 5px 15px;
         }
 
-        .sectionTitle {
-            float: left;
-        }
         .tableContainer {
-            border: 1px solid black;
+            border: 1px solid #d3d3d3;
+            position: relative;
+            top: 25px;
+            height: 47vh;
+            overflow: scroll;
+            width: 100%;
+            box-shadow: 2px 2px 6px #d3d3d3;
+            border-radius: 10px;
         }
         #supApprovalContainer {
             display: none;
@@ -85,6 +90,11 @@
             padding: 0 5px 0 5px;
         }
 
+        .tableContainer td {
+            padding: 5px;
+            border-bottom: 1px solid #d3d3d3;
+        }
+
 
     </style>
 </head>
@@ -98,10 +108,10 @@
 <div class="loggedInUserBanner">
 <small>Logged in as: <span th:text="${loggedInEmail}"></span><span th:text="${appUserId}"></span></small>
 </div>
-<h1>Dashboard</h1>
-
 <div class="container">
-    <div class="row">
+<h1>Dashboard</h1>
+    <h2>Balances</h2>
+    <div class="row d-flex justify-content-evenly">
 <div class="dataBox">
     <p>Occ Balance </p>
     <div class="balanceNum" th:text="${appUser.getOccurrenceBalance()}"></div>
@@ -114,13 +124,10 @@
 </div>
 
 
-
-
+<div class="container">
+<h2 class="sectionTitle">Requests</h2>
+    <button id="timeReqBtn" type="button" data-bs-toggle="modal" data-bs-target="#timeReqModal">Submit Request</button>
 <div class="tableContainer">
-    <h2 class="sectionTitle">Requests</h2>
-    <div>
-        <button id="timeReqBtn" type="button" data-bs-toggle="modal" data-bs-target="#timeReqModal">Submit Request</button>
-    </div>
 <table>
     <thead>
     <tr>
@@ -210,7 +217,7 @@
 </div>
 
 
-
+</div>
 
 
 
