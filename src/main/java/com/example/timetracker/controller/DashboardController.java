@@ -32,6 +32,8 @@ public class DashboardController {
         }
         AppUser appUser = (AppUser) session.getAttribute("appUser");
         List<TimeRequest> allTimeRequests = timeRequestService.getAllTimeRequests();
+
+
         model.addAttribute("allTimeRequests", allTimeRequests);
         model.addAttribute("appUser", appUser);
         model.addAttribute("loggedInEmail", session.getAttribute("loggedInEmail"));
@@ -65,14 +67,10 @@ public class DashboardController {
         timeRequestService.saveTimeRequest(timeRequest);
         System.out.println("Time request saved....");
 
-        // FIX ME -- if time is unscheduled -> approved or auto_approved -> updated users occurrence balance and pto balance
-//        if(type.equals(TimeType.UNTIME)) {
-//            if(timeRequestStatus.equals(TimeRequestStatus.APPROVED) || timeRequestStatus.equals(TimeRequestStatus.AUTO_APPROVED)) {
-//
-//            }
-//        }
-
         List<TimeRequest> allTimeRequests = timeRequestService.getAllTimeRequests();
+        // check time type and remove occurrence if valid unscheduled time request
+        timeRequestService.removeOccurrenceIfUnscheduledTimeReq(timeRequest, appUser);
+
         model.addAttribute("allTimeRequests", allTimeRequests);
         return "dashboard";
     }

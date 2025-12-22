@@ -1,10 +1,14 @@
 package com.example.timetracker.service;
 
+import com.example.timetracker.model.AppUser;
 import com.example.timetracker.model.TimeRequest;
+import com.example.timetracker.model.enums.TimeType;
 import com.example.timetracker.repository.TimeRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.sql.Time;
 import java.util.List;
 
 
@@ -19,5 +23,11 @@ public class TimeRequestService {
     }
     public List<TimeRequest> getAllTimeRequests() {
         return timeRequestRepository.findAll();
+    }
+
+    public void removeOccurrenceIfUnscheduledTimeReq(TimeRequest timeRequest, AppUser appUser) {
+        if(timeRequest.getTimeType() == TimeType.UNTIME) {
+            appUser.setOccurrenceBalance(appUser.getOccurrenceBalance() - timeRequest.getOccurrenceCount());
+        }
     }
 }
