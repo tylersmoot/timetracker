@@ -97,7 +97,14 @@
             padding: 5px;
             border-bottom: 1px solid #d3d3d3;
         }
-
+        .reqMessage {
+            background: red;
+            color: white;
+            padding: 4px;
+            border-radius: 10px;
+            position: relative;
+            top: 10px;
+        }
 
     </style>
 </head>
@@ -121,7 +128,7 @@
 </div>
 <div class="dataBox">
     <p>PTO</p>
-    <div class="balanceNum" th:text="${appUser.getYearlyAssignedPtoBalance()}"></div>
+    <div class="balanceNum" th:text="${appUser.getPtoBalance()}"></div>
 </div>
         </div>
 </div>
@@ -130,6 +137,7 @@
 <div class="container">
 <h2 class="sectionTitle">Requests</h2>
     <button id="timeReqBtn" type="button" data-bs-toggle="modal" data-bs-target="#timeReqModal">Submit Request</button>
+    <div class="reqMessage">** Unscheduled requests fall off after 1 year</div>
 <div class="tableContainer">
 <table>
     <thead>
@@ -141,6 +149,7 @@
         <td>Hrs</td>
         <td>Type</td>
         <td>Status</td>
+        <td>Action</td>
     </tr>
     </thead>
     <tbody>
@@ -152,6 +161,7 @@
         <td th:text="${request.getRequestedHours()}"></td>
         <td th:text="${request.getTimeType()}" class="timeTypeTableData"></td>
         <td th:text="${request.getTimeRequestStatus()}"></td>
+        <td><button class="btn btn-outline-warning btn-sm">Edit</button></td>
     </tr>
     </tbody>
 </table>

@@ -70,6 +70,7 @@ public class DashboardController {
         List<TimeRequest> allTimeRequests = timeRequestService.getAllTimeRequests();
         // check time type and remove occurrence if valid unscheduled time request
         timeRequestService.removeOccurrenceIfUnscheduledTimeReq(timeRequest, appUser);
+        timeRequestService.removePtoIfApprovedTimeReq(timeRequest, appUser);
 
         model.addAttribute("allTimeRequests", allTimeRequests);
         return "dashboard";
