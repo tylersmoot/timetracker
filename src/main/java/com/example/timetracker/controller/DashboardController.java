@@ -4,6 +4,7 @@ import com.example.timetracker.model.AppUser;
 import com.example.timetracker.model.TimeRequest;
 import com.example.timetracker.model.enums.TimeRequestStatus;
 import com.example.timetracker.model.enums.TimeType;
+import com.example.timetracker.service.AppUserService;
 import com.example.timetracker.service.TimeRequestService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -19,24 +20,25 @@ import java.util.List;
 public class DashboardController {
 
     private final TimeRequestService timeRequestService;
+    private final AppUserService appUserService;
 
-    public DashboardController(TimeRequestService timeRequestService) {
+    public DashboardController(TimeRequestService timeRequestService, AppUserService appUserService) {
         this.timeRequestService = timeRequestService;
+        this.appUserService = appUserService;
     }
 
     @GetMapping("/dashboard")
     public String showDashboardPage(HttpSession session, Model model, RedirectAttributes redirectAttributes) {
-        if(session.getAttribute("loggedInEmail") == null) {
+        String loggedInEmail = (String) session.getAttribute("loggedInEmail");
+        if(loggedInEmail == null) {
             redirectAttributes.addFlashAttribute("sessionError", "Session Expired");
             return "redirect:/login";
         }
-        AppUser appUser = (AppUser) session.getAttribute("appUser");
-        List<TimeRequest> allTimeRequests = timeRequestService.getAllTimeRequests();
-
-
-        model.addAttribute("allTimeRequests", allTimeRequests);
+        AppUser appUser = appUserService.findByEmail(loggedInEmail);
         model.addAttribute("appUser", appUser);
-        model.addAttribute("loggedInEmail", session.getAttribute("loggedInEmail"));
+        List<TimeRequest> allTimeRequests = timeRequestService.getAllTimeRequests();
+        model.addAttribute("allTimeRequests", allTimeRequests);
+//        model.addAttribute("loggedInEmail", session.getAttribute("loggedInEmail"));
         return "dashboard";
     }
 
@@ -45,16 +47,9 @@ public class DashboardController {
 
         String loggedInEmail = (String) session.getAttribute("loggedInEmail");
         model.addAttribute("loggedInEmail", loggedInEmail);
-        AppUser appUser = (AppUser) session.getAttribute("appUser");
+        AppUser appUser = appUserService.findByEmail(loggedInEmail);
         model.addAttribute("appUser", appUser);
-        System.out.println("Logged in user: " + loggedInEmail);
-        System.out.println("----New Time Off Request Submission----");
-        System.out.println("Time type: " + timeType);
-        System.out.println("Request date: " + requestDate);
-        System.out.println("Request hours: " + requestHours);
-        System.out.println("Occurrence count: " + occurrenceCount);
         TimeType type = TimeType.valueOf(timeType);
-        System.out.println("Attempting to save time request to database....");
         TimeRequest timeRequest = new TimeRequest();
         timeRequest.setTimeType(type);
         timeRequest.setRequestedDate(requestDate);
@@ -67,12 +62,13 @@ public class DashboardController {
         timeRequestService.saveTimeRequest(timeRequest);
         System.out.println("Time request saved....");
 
-        List<TimeRequest> allTimeRequests = timeRequestService.getAllTimeRequests();
+
         // check time type and remove occurrence if valid unscheduled time request
         timeRequestService.removeOccurrenceIfUnscheduledTimeReq(timeRequest, appUser);
         timeRequestService.removePtoIfApprovedTimeReq(timeRequest, appUser);
+        List<TimeRequest> allTimeRequests = timeRequestService.getAllTimeRequests();
 
         model.addAttribute("allTimeRequests", allTimeRequests);
-        return "dashboard";
+        return "redirect:/dashboard";
     }
 }

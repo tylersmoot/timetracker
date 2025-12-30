@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Time Request Details</title>
+    <style>
+        nav ul {
+           list-style-type: none;
+           display: flex;
+           justify-content: end;
+       }
+        .loggedInUserBanner {
+            background: linear-gradient(to right, #1E90FF, #004687);
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+            text-shadow: 1px 1px black;
+        }
+
+        .detailsHeader {
+            background: #1E90FF;
+            display: flex;
+            padding: 5px;
+            color: white;
+            font-weight: bold;
+            flex-direction: column;
+            width: 25vw;
+            border-radius: 10px 0 0 10px;
+            float: left;
+            justify-content: space-between;
+        }
+        .detailsBody {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            padding: 5px;
+            background: lightgray;
+            border-radius: 0 10px 10px 0;
+        }
+        .requestStatusBlock {
+            display: flex;
+            justify-content: space-between;
+        }
+        .hiddenReqInput {
+            display: none;
+        }
+        #deleteLink {
+            text-decoration: none;
+            color: red;
+            display: block;
+
+        }
+        #updateLink {
+            text-decoration: none;
+            display: block;
+        }
+
+
+    </style>
+</head>
+<body>
+<span style="position: absolute; top: 5px;">TimeTracker</span>
+<nav>
+    <ul>
+        <li><a th:href="@{/logout}">Log out</a></li>
+    </ul>
+</nav>
+
+<div class="loggedInUserBanner">
+    <small>Logged in as: <span th:text="${appUser.getEmail()}"></span></small>
+</div>
+
+<a th:href="@{/dashboard}">Back</a>
+<h2>Request Details</h2>
+<button class="btn btn-outline-info"><a href="#" id="updateLink">Update</a></button>
+<button class="btn btn-outline-danger"><a href="#" id="deleteLink">Delete</a></button>
+
+<div class="container detailsContainer">
+    <div class="detailsHeader">
+<p>ID</p>
+
+<p>Created</p>
+
+<p>Occurrence</p>
+
+<p>Date</p>
+
+<p>Hours</p>
+
+<p>Type</p>
+
+<p>Status</p>
+
+    </div>
+
+    <div class="detailsBody">
+        <p th:text="${timeRequest.getId()}"></p>
+        <p th:text="${timeRequest.getCreatedAt()}"></p>
+        <p th:text="${timeRequest.getOccurrenceCount()}"></p>
+        <p th:text="${timeRequest.getRequestedDate()}"></p>
+        <p th:text="${timeRequest.getRequestedHours()}"></p>
+        <p th:text="${timeRequest.getTimeType()}"></p>
+        <div class="requestStatusBlock">
+        <p th:text="${timeRequest.getTimeRequestStatus()}"></p>
+            <div class="hiddenReqInput">
+                <form method="post" th:action="@{/request/update}">
+                    <input type="hidden" name="id" th:value="${timeRequest.getId()}">
+           <select name="reqStatusChangeInput">
+               <option value="" disabled selected>Select</option>
+               <option value="PENDING">PENDING</option>
+               <option value="APPROVED">APPROVED</option>
+               <option value="CANCELLED">CANCELLED</option>
+               <option value="AUTO_APPROVED">AUTO_APPROVED</option>
+           </select>
+            <button type="submit">Save</button>
+                </form>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    let updateLink = document.querySelector("#updateLink");
+    let hiddenInput = document.querySelector(".hiddenReqInput");
+
+    updateLink.addEventListener("click", function() {
+        hiddenInput.classList.toggle("hiddenReqInput");
+    });
+
+
+
+
+</script>
+</body>
+</html>

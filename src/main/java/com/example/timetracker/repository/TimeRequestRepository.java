@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface TimeRequestRepository extends JpaRepository<TimeRequest, Integer> {
 
+    public TimeRequest findById(int id);
 }

@@ -105,19 +105,27 @@
             position: relative;
             top: 10px;
         }
+        a {
+            text-decoration: none;
+            color: black;
+            display: block;
+        }
 
     </style>
 </head>
 <body>
+
 <span style="position: absolute; top: 5px;">TimeTracker</span>
 <nav>
     <ul>
         <li><a th:href="@{/logout}">Log out</a></li>
     </ul>
 </nav>
+
 <div class="loggedInUserBanner">
-<small>Logged in as: <span th:text="${loggedInEmail}"></span><span th:text="${appUserId}"></span></small>
+<small>Logged in as: <span th:text="${appUser.getEmail()}"></span><span th:text="${appUserId}"></span></small>
 </div>
+
 <div class="container">
 <h1>Dashboard</h1>
     <h2>Balances</h2>
@@ -161,7 +169,7 @@
         <td th:text="${request.getRequestedHours()}"></td>
         <td th:text="${request.getTimeType()}" class="timeTypeTableData"></td>
         <td th:text="${request.getTimeRequestStatus()}"></td>
-        <td><button class="btn btn-outline-warning btn-sm">Edit</button></td>
+        <td><a th:href="@{/request/{id}(id=${request.getId()})}">Edit</a></td>
     </tr>
     </tbody>
 </table>
