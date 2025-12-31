@@ -22,7 +22,7 @@ public void registerNewUser(SignUpRequest signUpRequest) {
     appUser.setEmail(signUpRequest.getEmail());
     appUser.setYearlyAssignedPtoBalance(signUpRequest.getYearlyAssignedPtoBalance());
     appUser.setPtoBalance(signUpRequest.getPtoBalance());
-    appUser.setPassword(signUpRequest.getPassword());
+    appUser.setPasswordHash(signUpRequest.getPasswordHash());
     appUser.setOccurrenceBalance(8.0);
 
     // save new app user

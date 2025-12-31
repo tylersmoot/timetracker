@@ -3,12 +3,6 @@
     padding: 0;
 }
 
-.sessionErrorMessage {
-    color: red;
-    font-weight: bold;
-    background: #FFC1C3;
-}
-
 
 #requestTable {
     border: 1px solid black;

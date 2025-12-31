@@ -17,7 +17,7 @@ public class AppUser {
     @Column
     private String email;
     @Column
-    private String password;
+    private String passwordHash;
     @Column
     double occurrenceBalance;
     @Column
@@ -82,12 +82,12 @@ public class AppUser {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
 

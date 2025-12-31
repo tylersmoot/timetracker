@@ -38,23 +38,37 @@
             padding: 5px;
             background: lightgray;
             border-radius: 0 10px 10px 0;
+            height: 290px;
         }
         .requestStatusBlock {
             display: flex;
-            justify-content: space-between;
+            justify-content: start;
         }
         .hiddenReqInput {
             display: none;
+            position: relative;
+            left: 5px;
         }
         #deleteLink {
             text-decoration: none;
-            color: red;
             display: block;
 
         }
         #updateLink {
             text-decoration: none;
             display: block;
+            padding: 5px;
+        }
+        .modifyReqLinksContainer {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: center;
+        }
+
+        #deleteBtnLink {
+            text-decoration: none;
+            color: white;
         }
 
 
@@ -74,8 +88,10 @@
 
 <a th:href="@{/dashboard}">Back</a>
 <h2>Request Details</h2>
-<button class="btn btn-outline-info"><a href="#" id="updateLink">Update</a></button>
-<button class="btn btn-outline-danger"><a href="#" id="deleteLink">Delete</a></button>
+<div class="modifyReqLinksContainer">
+<a href="#" id="updateLink">Update</a>
+<a href="#" id="deleteLink" data-bs-toggle="modal" data-bs-target="#deleteReqModal">Delete</a>
+</div>
 
 <div class="container detailsContainer">
     <div class="detailsHeader">
@@ -109,12 +125,13 @@
                     <input type="hidden" name="id" th:value="${timeRequest.getId()}">
            <select name="reqStatusChangeInput">
                <option value="" disabled selected>Select</option>
-               <option value="PENDING">PENDING</option>
-               <option value="APPROVED">APPROVED</option>
-               <option value="CANCELLED">CANCELLED</option>
-               <option value="AUTO_APPROVED">AUTO_APPROVED</option>
+               <option th:if="${timeRequest.timeRequestStatus != T(com.example.timetracker.model.enums.TimeRequestStatus).PENDING}" value="PENDING">PENDING</option>
+               <option th:if="${timeRequest.timeRequestStatus != T(com.example.timetracker.model.enums.TimeRequestStatus).APPROVED}" value="APPROVED">APPROVED</option>
+               <option th:if="${timeRequest.timeRequestStatus != T(com.example.timetracker.model.enums.TimeRequestStatus).CANCELLED}" value="CANCELLED">CANCELLED</option>
+               <option th:if="${timeRequest.timeRequestStatus != T(com.example.timetracker.model.enums.TimeRequestStatus).AUTO_APPROVED}" value="AUTO_APPROVED">AUTO_APPROVED</option>
            </select>
-            <button type="submit">Save</button>
+            <button class="btn btn-success" type="submit">Save</button>
+                    <button class="btn btn-secondary" id="cancelBtn" type="reset">Cancel</button>
                 </form>
                 </div>
         </div>
@@ -122,12 +139,39 @@
 </div>
 
 
+<!-- delete request confirm modal -->
+<div class="modal" tabindex="-1" id="deleteReqModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this request?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger"><a th:href="@{/request/delete/{id}(id=${timeRequest.id})}" id="deleteBtnLink">Delete</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
 <script>
     let updateLink = document.querySelector("#updateLink");
     let hiddenInput = document.querySelector(".hiddenReqInput");
+    let cancelBtn = document.querySelector("#cancelBtn");
 
     updateLink.addEventListener("click", function() {
         hiddenInput.classList.toggle("hiddenReqInput");
+    });
+
+     cancelBtn.addEventListener("click", function() {
+        hiddenInput.classList.add("hiddenReqInput");
     });
 
 

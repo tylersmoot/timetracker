@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
+    <title>Dashboard</title>
 
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -53,6 +53,9 @@
             color: #1E90FF;
             font-weight: bold;
             padding: 5px 15px 5px 15px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
         }
         #timeReqBtn:hover {
             background: #1E90FF;
@@ -100,10 +103,13 @@
         .reqMessage {
             background: red;
             color: white;
-            padding: 4px;
+            padding: 8px;
             border-radius: 10px;
             position: relative;
             top: 10px;
+            display: flex;
+            justify-content: start;
+            align-items: center;
         }
         a {
             text-decoration: none;
@@ -111,7 +117,60 @@
             display: block;
         }
 
+        #editLink {
+            display: block;
+            text-align: center;
+            background: #dedede;
+        }
+        #untimeReminder {
+            margin-right: 5px;
+        }
+        .selectFilter {
+            float: left;
+            width: 25vw;
+
+        }
+        #filterLabel {
+            float: left;
+            position: relative;
+            top: 15px;
+            padding-right: 5px;
+        }
+        #filterContainer {
+            position: relative;
+            top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+        }
+        #filterBtn {
+            position: relative;
+            left: 10px;
+        }
+        #deletedReqMessageContainer {
+            position: relative;
+            top: 25px;
+            background: lightgreen;
+            border-radius: 10px;
+
+
+        }
+        #deletedRequestText {
+            color: green;
+            margin: 0;
+            font-weight: bold;
+        }
+        #progressLine {
+            width: 0%;
+            height: 5px;
+            display: none;
+            background: green;
+            border-radius: 10px;
+        }
+
     </style>
+
+
 </head>
 <body>
 
@@ -125,6 +184,7 @@
 <div class="loggedInUserBanner">
 <small>Logged in as: <span th:text="${appUser.getEmail()}"></span><span th:text="${appUserId}"></span></small>
 </div>
+
 
 <div class="container">
 <h1>Dashboard</h1>
@@ -144,14 +204,41 @@
 
 <div class="container">
 <h2 class="sectionTitle">Requests</h2>
-    <button id="timeReqBtn" type="button" data-bs-toggle="modal" data-bs-target="#timeReqModal">Submit Request</button>
-    <div class="reqMessage">** Unscheduled requests fall off after 1 year</div>
+    <button id="timeReqBtn" type="button" data-bs-toggle="modal" data-bs-target="#timeReqModal"><svg style="position: relative; right: 10px;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5z"/>
+    </svg><span>New Request</span></button>
+    <div class="reqMessage"><svg style="position: relative; right: 3px;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901"/>
+    </svg><span id="untimeReminder">Unscheduled requests fall off after 1 year</span></div>
+
+
+    <div id="filterContainer">
+    <p id="filterLabel">filter by: </p>
+    <select class="selectFilter" name="typeFilter">
+        <option value="" disabled selected>Type</option>
+        <option value="UNTIME">UNTIME</option>
+        <option value="SCHTIME">SCHTIME</option>
+    </select>
+        <select class="selectFilter" name="statusFilter">
+            <option value="" disabled selected>Status</option>
+            <option value="APPROVED">APPROVED</option>
+            <option value="PENDING">PENDING</option>
+            <option value="CANCELLED">CANCELLED</option>
+            <option value="AUTO_APPROVED">AUTO_APPROVED</option>
+        </select>
+        <button id="filterBtn" class="btn btn-outline-dark" type="submit">Filter</button>
+    </div>
+
+    <div id="deletedReqMessageContainer">
+        <p th:if="${deletedReqMessage}" id="deletedRequestText" th:text="${deletedReqMessage}">Request successfully deleted</p>
+        <div id="progressLine"></div>
+    </div>
+
 <div class="tableContainer">
 <table>
     <thead>
     <tr>
         <td>Id</td>
-        <td>Created</td>
         <td>Occ</td>
         <td>Date</td>
         <td>Hrs</td>
@@ -163,13 +250,12 @@
     <tbody>
     <tr th:each="request : ${allTimeRequests}">
         <td th:text="${request.getId()}"></td>
-        <td th:text="${request.getCreatedAt()}"></td>
         <td th:text="${request.getOccurrenceCount()}"></td>
         <td th:text="${request.getRequestedDate()}"></td>
         <td th:text="${request.getRequestedHours()}"></td>
         <td th:text="${request.getTimeType()}" class="timeTypeTableData"></td>
         <td th:text="${request.getTimeRequestStatus()}"></td>
-        <td><a th:href="@{/request/{id}(id=${request.getId()})}">Edit</a></td>
+        <td><a id="editLink" th:href="@{/request/{id}(id=${request.getId()})}">Edit</a></td>
     </tr>
     </tbody>
 </table>
@@ -228,7 +314,7 @@
                    <input type="hidden" id="approvalStatus" name="approvalStatus" value="AUTO_APPROVED">
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary" id="modalSubmitBtn">Submit</button>
             </div>
                </form>
@@ -269,6 +355,19 @@
            }
 
     });
+
+    let deleteRequestMessageContainer = document.querySelector("#deletedReqMessageContainer");
+    let progressLine = document.querySelector("#progressLine");
+
+
+    function hideDeleteRequestMessage() {
+        deleteRequestMessageContainer.style.display = "none";
+    }
+
+
+    const messageTimeout = setTimeout(hideDeleteRequestMessage, 5000);
+
+
 </script>
 
 </body>

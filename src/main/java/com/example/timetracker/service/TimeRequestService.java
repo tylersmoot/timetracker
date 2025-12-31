@@ -9,6 +9,8 @@ import com.example.timetracker.repository.TimeRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Time;
 import java.util.List;
@@ -28,6 +30,10 @@ public class TimeRequestService {
     }
     public List<TimeRequest> getAllTimeRequests() {
         return timeRequestRepository.findAll();
+    }
+    public void deleteTimeRequest(TimeRequest timeRequest) {
+        timeRequestRepository.delete(timeRequest);
+
     }
     public void updateTimeRequestStatusAndPto(TimeRequestStatus status, int requestID, String loggedInEmail) {
         TimeRequest timeRequest = timeRequestRepository.findById(requestID);
