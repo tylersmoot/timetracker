@@ -28,18 +28,16 @@
             border-radius: 10px;
             display: flex;
             flex-direction: column;
-            width: 100%
         }
 
         input, select {
-            border: 2px solid gray;
+            border: 1px solid gray;
             padding: 5px;
             width: 100%;
             border-radius: 10px;
         }
         .emailInput {
             width: 100%;
-            box-shadow: 4px 6px 5px lightgray;
         }
         h2 {
             color: white;
@@ -64,6 +62,11 @@
             padding: 5px 15px 5px 15px;
             box-shadow: 4px 6px 5px lightgray;
         }
+        .line {
+            height: 5px;
+            width: 10vw;
+            background: #1E90FF;
+        }
 
 
     </style>
@@ -80,30 +83,40 @@
     <h2>Sign Up</h2>
 <div class="formBody">
 <form th:action="@{/sign-up}" method="post">
+    <fieldset>
+        <legend>Contact Information</legend>
+        <div class="line"></div>
     <label>First name</label>
     <br>
-    <input type="text" name="firstName" placeholder="First name">
+    <input type="text" name="firstName">
     <br>
     <label>Last name</label>
     <br>
-    <input type="text" name="lastName" placeholder="Last name">
+    <input type="text" name="lastName">
     <br>
     <label>Email</label>
     <br>
     <input type="email" name="email" class="emailInput">
+    </fieldset>
     <br>
     <br>
-    <label>How many PTO Hours are you assigned per year?</label>
+    <fieldset>
+        <legend>PTO Balance Information</legend>
+        <div class="line"></div>
+        <label>How many PTO Hours are you assigned per year?</label>
     <br>
-    <input type="number" name="yearlyAssignedPtoBalance" placeholder="EX: 196">
+    <input type="number" name="yearlyAssignedPtoBalance">
     <br>
     <label>What is your current available PTO balance?</label>
     <br>
-    <input type="number" name="ptoBalance" placeholder="EX: 136">
+    <input type="number" name="ptoBalance">
+    </fieldset>
     <br>
     <br>
     <!-- NEW INPUTS HERE - get current occurence balance && yearly assigned occurences (sick days) -->
-
+    <fieldset>
+        <legend>Password</legend>
+        <div class="line"></div>
     <label>Choose a password</label>
     <br>
     <input type="password" name="password">
@@ -111,6 +124,7 @@
     <label>Re-type password</label>
     <br>
     <input type="password" name="retypedPassword">
+    </fieldset>
     <br>
     <br>
     <div>

@@ -120,7 +120,6 @@
         #editLink {
             display: block;
             text-align: center;
-            background: #dedede;
         }
         #untimeReminder {
             margin-right: 5px;
@@ -160,13 +159,7 @@
             margin: 0;
             font-weight: bold;
         }
-        #progressLine {
-            width: 0%;
-            height: 5px;
-            display: none;
-            background: green;
-            border-radius: 10px;
-        }
+
 
     </style>
 
@@ -226,7 +219,7 @@
             <option value="CANCELLED">CANCELLED</option>
             <option value="AUTO_APPROVED">AUTO_APPROVED</option>
         </select>
-        <button id="filterBtn" class="btn btn-outline-dark" type="submit">Filter</button>
+        <button id="filterBtn" class="btn btn-dark" type="submit">Filter</button>
     </div>
 
     <div id="deletedReqMessageContainer">
@@ -255,7 +248,7 @@
         <td th:text="${request.getRequestedHours()}"></td>
         <td th:text="${request.getTimeType()}" class="timeTypeTableData"></td>
         <td th:text="${request.getTimeRequestStatus()}"></td>
-        <td><a id="editLink" th:href="@{/request/{id}(id=${request.getId()})}">Edit</a></td>
+        <td><button class="btn btn-outline-dark"><a id="editLink" th:href="@{/request/{id}(id=${request.getId()})}">View</a></button></td>
     </tr>
     </tbody>
 </table>
@@ -366,6 +359,20 @@
 
 
     const messageTimeout = setTimeout(hideDeleteRequestMessage, 5000);
+
+    const tableItemStatus = document.querySelectorAll(".tableContainer td");
+
+    for(let tableItem of tableItemStatus) {
+    if(tableItem.textContent == "APPROVED" || tableItem.textContent == "AUTO_APPROVED") {
+        tableItem.style.background = "lightgreen";
+        }
+    if(tableItem.textContent == "PENDING") {
+        tableItem.style.background = "yellow";
+        }
+    if(tableItem.textContent == "CANCELLED") {
+        tableItem.style.background = "lightpink";
+        }
+}
 
 
 </script>

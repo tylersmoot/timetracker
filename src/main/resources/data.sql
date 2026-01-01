@@ -13,16 +13,15 @@ id,
     'Test',
     'User',
     'password',
+    182,
     200,
-    200,
-    8
+    7
 );
 
 
 
 
 INSERT INTO time_request (
-    id,
     created_at,
     created_by,
     occurrence_count,
@@ -31,6 +30,6 @@ INSERT INTO time_request (
     time_request_status,
     time_type
 ) VALUES
-(1, CURRENT_TIMESTAMP, 'test@company.com', 0, '2025-01-10', 8, 'PENDING', 'UNTIME'),
-(2, CURRENT_TIMESTAMP, 'test@company.com', 1, '2025-01-05', 0, 'APPROVED', 'SCHTIME'),
-(3, CURRENT_TIMESTAMP, 'test@company.com', 0, '2025-01-20', 4, 'PENDING', 'UNTIME');
+(CURRENT_TIMESTAMP, 'test@company.com', 1, '2025-01-10', 8, 'AUTO_APPROVED', 'UNTIME'),
+(CURRENT_TIMESTAMP, 'test@company.com', 0, '2025-01-05', 10, 'APPROVED', 'SCHTIME'),
+(CURRENT_TIMESTAMP, 'test@company.com', 0, '2025-01-20', 10, 'PENDING', 'SCHTIME');
