@@ -21,24 +21,24 @@ public class AppUser {
     @Column
     double occurrenceBalance;
     @Column
-    double ptoBalance;
+    Double remainingPtoBalance;
     @Column
-    double yearlyAssignedPtoBalance;
+    Double yearlyAssignedPtoBalance;
 
-    public double getYearlyAssignedPtoBalance() {
+    public Double getYearlyAssignedPtoBalance() {
         return yearlyAssignedPtoBalance;
     }
 
-    public void setYearlyAssignedPtoBalance(double yearlyAssignedPtoBalance) {
+    public void setYearlyAssignedPtoBalance(Double yearlyAssignedPtoBalance) {
         this.yearlyAssignedPtoBalance = yearlyAssignedPtoBalance;
     }
 
-    public double getPtoBalance() {
-        return ptoBalance;
+    public Double getRemainingPtoBalance() {
+        return remainingPtoBalance;
     }
 
-    public void setPtoBalance(double ptoBalance) {
-        this.ptoBalance = ptoBalance;
+    public void setRemainingPtoBalance(Double remainingPtoBalance) {
+        this.remainingPtoBalance = remainingPtoBalance;
     }
 
     public double getOccurrenceBalance() {

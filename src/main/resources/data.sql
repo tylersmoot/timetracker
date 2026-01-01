@@ -1,14 +1,14 @@
 INSERT INTO app_users (
-id,
+
     email,
     first_name,
     last_name,
     password_hash,
-    pto_balance,
+    remaining_pto_balance,
     yearly_assigned_pto_balance,
     occurrence_balance
 ) VALUES (
-1,
+
     'tylercsmoot8@gmail.com',
     'Test',
     'User',

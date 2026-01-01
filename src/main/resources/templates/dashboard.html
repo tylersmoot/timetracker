@@ -175,7 +175,7 @@
 </nav>
 
 <div class="loggedInUserBanner">
-<small>Logged in as: <span th:text="${appUser.getEmail()}"></span><span th:text="${appUserId}"></span></small>
+<small>Logged in as: <span th:text="${appUser.getEmail()}"></span></small>
 </div>
 
 
@@ -189,7 +189,8 @@
 </div>
 <div class="dataBox">
     <p>PTO</p>
-    <div class="balanceNum" th:text="${appUser.getPtoBalance()}"></div>
+    <!-- FIX ME -- set default as yearly, else remaining -->
+    <div class="balanceNum" th:text="${appUser.getRemainingPtoBalance()}"></div>
 </div>
         </div>
 </div>

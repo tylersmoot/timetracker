@@ -14,7 +14,7 @@
             justify-content: end;
         }
         .mainBody {
-            height: 100vh;
+            height: 100%;
             padding: 5px 20px 5px 20px;
             background: #1E90FF;
             display: flex;
@@ -68,6 +68,10 @@
             background: #1E90FF;
         }
 
+        #hiddenInputContainer {
+            display: none;
+        }
+
 
     </style>
 </head>
@@ -93,10 +97,6 @@
     <label>Last name</label>
     <br>
     <input type="text" name="lastName">
-    <br>
-    <label>Email</label>
-    <br>
-    <input type="email" name="email" class="emailInput">
     </fieldset>
     <br>
     <br>
@@ -104,26 +104,41 @@
         <legend>PTO Balance Information</legend>
         <div class="line"></div>
         <label>How many PTO Hours are you assigned per year?</label>
+        <small>(Total PTO hours granted per calendar year)</small>
     <br>
     <input type="number" name="yearlyAssignedPtoBalance">
     <br>
-    <label>What is your current available PTO balance?</label>
+    <label>Have you used any PTO this year?</label>
+        <small>(Have you passed the new year?)</small>
+        <select name="usedPtoQuestion" id="usedPtoQuestion">
+            <option value="" disabled selected></option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        <div id="hiddenInputContainer">
+        <label>What is your remaining PTO balance for the year?</label>
+        <small>(How much PTO hours do you have left for the current calendar year?)</small>
+        <input type="number" id="remainingPtoBalanceInput" name="remainingPtoBalance">
+        </div>
     <br>
-    <input type="number" name="ptoBalance">
+
     </fieldset>
     <br>
     <br>
     <!-- NEW INPUTS HERE - get current occurence balance && yearly assigned occurences (sick days) -->
     <fieldset>
-        <legend>Password</legend>
+        <legend>Login Information</legend>
         <div class="line"></div>
+        <label>Email (username)</label>
+        <br>
+        <input type="email" name="email" class="emailInput">
     <label>Choose a password</label>
     <br>
-    <input type="password" name="password">
+    <input type="password" name="passwordHash" minlength="8" required>
     <br>
     <label>Re-type password</label>
     <br>
-    <input type="password" name="retypedPassword">
+    <input type="password" name="retypedPassword" minlength="8" required>
     </fieldset>
     <br>
     <br>
@@ -157,5 +172,21 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+<script>
+    let hiddenInput = document.querySelector("#remainingPtoBalanceInput");
+    let usedPtoQuestion = document.querySelector("#usedPtoQuestion");
+    let hiddenInputContainer = document.querySelector("#hiddenInputContainer");
+
+    usedPtoQuestion.addEventListener("input", function() {
+        if(usedPtoQuestion.value == "yes") {
+            hiddenInputContainer.style.display = "block";
+        }
+        else {
+            hiddenInputContainer.style.display = "none";
+        }
+    });
+
+
+</script>
 </body>
 </html>

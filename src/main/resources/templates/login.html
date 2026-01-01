@@ -67,7 +67,7 @@
             top: 10px;
             border-radius: 10px;
         }
-       .sessionErrorMessage {
+       .sessionErrorMessage, #incorrectPasswordError {
             color: red;
             font-weight: bold;
             background: #FFC1C3;
@@ -112,6 +112,7 @@
     <div id="logoutConfirmationMessage" th:if="${logoutConfirmationMessage}" th:text="${logoutConfirmationMessage}"></div>
     <div id="newUserSuccessMessage" th:if="${newUserSuccessMessage}" th:text="${newUserSuccessMessage}"></div>
     <p class="sessionErrorMessage" th:if="${sessionError}" th:text="${sessionError}"></p>
+    <div id="incorrectPasswordError" th:if="${incorrectPasswordError}" th:text="${incorrectPasswordError}"></div>
 </div> <!-- end of main body -->
 
 

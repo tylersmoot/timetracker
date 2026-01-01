@@ -8,20 +8,20 @@ public class SignUpRequest {
 
     private String firstName;
     private String lastName;
+    private Double yearlyAssignedPtoBalance;
+    private Double remainingPtoBalance;
     private String email;
-    private double yearlyAssignedPtoBalance;
-    private double ptoBalance;
     private String passwordHash;
     private String retypedPassword;
 
     public SignUpRequest () {};
 
-    public SignUpRequest(String firstName, String lastName, String email, double yearlyAssignedPtoBalance, double ptoBalance, String passwordHash, String retypedPassword) {
+    public SignUpRequest(String firstName, String lastName, Double yearlyAssignedPtoBalance, Double remainingPtoBalance, String email, String passwordHash, String retypedPassword) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.yearlyAssignedPtoBalance = yearlyAssignedPtoBalance;
-        this.ptoBalance = ptoBalance;
+        this.remainingPtoBalance = remainingPtoBalance;
+        this.email = email;
         this.passwordHash = passwordHash;
         this.retypedPassword = retypedPassword;
 
@@ -51,20 +51,20 @@ public class SignUpRequest {
         this.email = email;
     }
 
-    public double getYearlyAssignedPtoBalance() {
+    public Double getYearlyAssignedPtoBalance() {
         return yearlyAssignedPtoBalance;
     }
 
-    public void setYearlyAssignedPtoBalance(double yearlyAssignedPtoBalance) {
+    public void setYearlyAssignedPtoBalance(Double yearlyAssignedPtoBalance) {
         this.yearlyAssignedPtoBalance = yearlyAssignedPtoBalance;
     }
 
-    public double getPtoBalance() {
-        return ptoBalance;
+    public Double getRemainingPtoBalance() {
+        return remainingPtoBalance;
     }
 
-    public void setPtoBalance(double ptoBalance) {
-        this.ptoBalance = ptoBalance;
+    public void setRemainingPtoBalance(Double remainingPtoBalance) {
+        this.remainingPtoBalance = remainingPtoBalance;
     }
 
     public String getPasswordHash() {

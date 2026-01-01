@@ -7,12 +7,7 @@ import com.example.timetracker.model.enums.TimeType;
 import com.example.timetracker.repository.AppUserRepository;
 import com.example.timetracker.repository.TimeRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.sql.Time;
 import java.util.List;
 
 
@@ -57,7 +52,7 @@ public class TimeRequestService {
     public void removePtoIfApprovedTimeReq(TimeRequest timeRequest, AppUser appUser) {
 
         if(timeRequest.getTimeRequestStatus() == TimeRequestStatus.APPROVED || timeRequest.getTimeRequestStatus() == TimeRequestStatus.AUTO_APPROVED) {
-            appUser.setPtoBalance(appUser.getPtoBalance() - timeRequest.getRequestedHours());
+            appUser.setRemainingPtoBalance(appUser.getRemainingPtoBalance() - timeRequest.getRequestedHours());
             appUserRepository.save(appUser);
         }
     }
