@@ -189,8 +189,8 @@
 </div>
 <div class="dataBox">
     <p>PTO</p>
-    <!-- FIX ME -- set default as yearly, else remaining -->
-    <div class="balanceNum" th:text="${appUser.getRemainingPtoBalance()}"></div>
+    <div class="balanceNum" th:if="${appUser.getRemainingPtoBalance() != null}" th:text="${appUser.getRemainingPtoBalance()}"></div>
+    <div class="balanceNum" th:if="${appUser.getRemainingPtoBalance() == null}" th:text="${appUser.getYearlyAssignedPtoBalance()}"></div>
 </div>
         </div>
 </div>
