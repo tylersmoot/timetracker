@@ -26,9 +26,22 @@ public class TimeRequest {
     private String createdAt;
     @Column
     @Enumerated(EnumType.STRING)
-    TimeRequestStatus timeRequestStatus;
+    private TimeRequestStatus timeRequestStatus;
     @Column
-    String createdBy;
+    private String createdBy;
+    @ManyToOne
+    @JoinColumn(name = "app_user_id", nullable = true)
+    private AppUser appUser;
+
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
+
 
     public String getCreatedBy() {
         return createdBy;
@@ -56,7 +69,6 @@ public class TimeRequest {
         LocalDate tempTime = LocalDate.now();
         DateTimeFormatter formattedTempTime = DateTimeFormatter.ofPattern("MM-dd-yyyy");
         this.createdAt = tempTime.format(formattedTempTime);
-
     }
 
 

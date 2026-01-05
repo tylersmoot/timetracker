@@ -22,6 +22,7 @@ INSERT INTO app_users (
 
 
 INSERT INTO time_request (
+
     created_at,
     created_by,
     occurrence_count,
@@ -29,7 +30,8 @@ INSERT INTO time_request (
     requested_hours,
     time_request_status,
     time_type
+
 ) VALUES
-(CURRENT_TIMESTAMP, 'test@company.com', 1, '2025-01-10', 8, 'AUTO_APPROVED', 'UNTIME'),
-(CURRENT_TIMESTAMP, 'test@company.com', 0, '2025-01-05', 10, 'APPROVED', 'SCHTIME'),
-(CURRENT_TIMESTAMP, 'test@company.com', 0, '2025-01-20', 10, 'PENDING', 'SCHTIME');
+(CURRENT_DATE, 'test@company.com', 1, '2025-01-10', 8, 'AUTO_APPROVED', 'UNTIME'),
+(CURRENT_DATE, 'test@company.com', 0, '2025-01-05', 10, 'APPROVED', 'SCHTIME'),
+(CURRENT_DATE, 'test@company.com', 0, '2025-01-20', 10, 'PENDING', 'SCHTIME');

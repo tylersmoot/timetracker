@@ -1,8 +1,5 @@
 package com.example.timetracker.model;
 
-import com.example.timetracker.model.enums.Role;
-import jakarta.persistence.*;
-
 
 public class SignUpRequest {
 

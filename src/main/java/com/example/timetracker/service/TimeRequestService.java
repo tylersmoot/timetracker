@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 
+
 @Service
 public class TimeRequestService {
 
@@ -59,4 +60,8 @@ public class TimeRequestService {
     public TimeRequest findById(int id) {
         return timeRequestRepository.findById(id);
     }
+    public List<TimeRequest> findAllByAppUser_Id(int id) {
+        return timeRequestRepository.findAllByAppUser_Id(id);
+    }
+
 }

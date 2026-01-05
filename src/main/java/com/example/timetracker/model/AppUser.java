@@ -1,7 +1,8 @@
 package com.example.timetracker.model;
 
-import com.example.timetracker.model.enums.Role;
 import jakarta.persistence.*;
+
+import java.sql.Time;
 
 @Entity
 @Table(name = "app_users")
@@ -24,6 +25,7 @@ public class AppUser {
     Double remainingPtoBalance;
     @Column
     Double yearlyAssignedPtoBalance;
+
 
     public Double getYearlyAssignedPtoBalance() {
         return yearlyAssignedPtoBalance;

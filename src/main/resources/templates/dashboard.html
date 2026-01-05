@@ -220,7 +220,7 @@
             <option value="CANCELLED">CANCELLED</option>
             <option value="AUTO_APPROVED">AUTO_APPROVED</option>
         </select>
-        <button id="filterBtn" class="btn btn-dark" type="submit">Filter</button>
+        <button id="filterBtn" class="btn btn-dark" type="submit">Apply</button>
     </div>
 
     <div id="deletedReqMessageContainer">
@@ -242,7 +242,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="request : ${allTimeRequests}">
+    <tr th:each="request : ${appUserTimeRequests}">
         <td th:text="${request.getId()}"></td>
         <td th:text="${request.getOccurrenceCount()}"></td>
         <td th:text="${request.getRequestedDate()}"></td>

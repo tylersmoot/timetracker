@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.util.List;
+
 
 @Controller
 public class DashboardController {
@@ -29,26 +29,34 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public String showDashboardPage(HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+        // FIX - SWITCH TO APP USER
         String loggedInEmail = (String) session.getAttribute("loggedInEmail");
+
         if(loggedInEmail == null) {
             redirectAttributes.addFlashAttribute("sessionError", "Session Expired");
             return "redirect:/login";
         }
+
         AppUser appUser = appUserService.findByEmail(loggedInEmail);
         model.addAttribute("appUser", appUser);
-        List<TimeRequest> allTimeRequests = timeRequestService.getAllTimeRequests();
-        model.addAttribute("allTimeRequests", allTimeRequests);
-//        model.addAttribute("loggedInEmail", session.getAttribute("loggedInEmail"));
+
+        List<TimeRequest> appUserTimeRequests = timeRequestService.findAllByAppUser_Id(appUser.getId());
+        model.addAttribute("appUserTimeRequests", appUserTimeRequests);
+        model.addAttribute("appUser", appUser);
+
         return "dashboard";
     }
 
     @PostMapping("/dashboard")
     public String saveTimeOffRequest(HttpSession session, Model model, @RequestParam("timeType")String timeType, @RequestParam("requestDate") String requestDate, @RequestParam("requestHours") double requestHours, @RequestParam("occurrenceCount") double occurrenceCount, @RequestParam("approvalStatus") String approvalStatus) {
 
+        // FIX - SWITCH TO APP USER
         String loggedInEmail = (String) session.getAttribute("loggedInEmail");
         model.addAttribute("loggedInEmail", loggedInEmail);
+
         AppUser appUser = appUserService.findByEmail(loggedInEmail);
         model.addAttribute("appUser", appUser);
+
         TimeType type = TimeType.valueOf(timeType);
         TimeRequest timeRequest = new TimeRequest();
         timeRequest.setTimeType(type);
@@ -59,16 +67,19 @@ public class DashboardController {
         TimeRequestStatus timeRequestStatus = TimeRequestStatus.valueOf(approvalStatus);
         timeRequest.setTimeRequestStatus(timeRequestStatus);
         timeRequest.setCreatedBy(loggedInEmail);
+        timeRequest.setAppUser(appUser);
+
         timeRequestService.saveTimeRequest(timeRequest);
         System.out.println("Time request saved....");
-
 
         // check time type and remove occurrence if valid unscheduled time request
         timeRequestService.removeOccurrenceIfUnscheduledTimeReq(timeRequest, appUser);
         timeRequestService.removePtoIfApprovedTimeReq(timeRequest, appUser);
-        List<TimeRequest> allTimeRequests = timeRequestService.getAllTimeRequests();
 
-        model.addAttribute("allTimeRequests", allTimeRequests);
+        List<TimeRequest> appUserTimeRequests = timeRequestService.findAllByAppUser_Id(appUser.getId());
+        model.addAttribute("appUserTimeRequests", appUserTimeRequests);
+
         return "redirect:/dashboard";
     }
+
 }

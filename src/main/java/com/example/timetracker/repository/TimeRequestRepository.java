@@ -2,9 +2,14 @@ package com.example.timetracker.repository;
 
 import com.example.timetracker.model.TimeRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
+import java.util.Optional;
+
 
 public interface TimeRequestRepository extends JpaRepository<TimeRequest, Integer> {
 
     public TimeRequest findById(int id);
+    public List<TimeRequest> findAllByAppUser_Id(int id);
+
 }
