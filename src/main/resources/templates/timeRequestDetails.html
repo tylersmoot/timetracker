@@ -71,6 +71,11 @@
             color: white;
         }
 
+        .deleteNotification {
+           color: white;
+           background: red;
+        }
+
 
     </style>
 </head>
@@ -149,7 +154,8 @@
             </div>
             <div class="modal-body">
                 <p>Are you sure you want to delete this request?</p>
-                <small>(If you delete this request, it will not deduct from your balances)</small>
+                <small class="deleteNotification">***You must cancel request first to update occurrence and PTO balance***</small>
+                <small class="deleteNotification">[Deleting a request will only remove it from the request list]</small>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

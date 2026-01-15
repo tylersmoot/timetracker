@@ -28,9 +28,12 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard")
-    public String showDashboardPage(HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+    public String showDashboardPage(HttpSession session, Model model, RedirectAttributes redirectAttributes, @RequestParam(required = false) String requestType, @RequestParam(required = false) String requestStatus) {
         // FIX - SWITCH TO APP USER
         String loggedInEmail = (String) session.getAttribute("loggedInEmail");
+
+        // FIX ME - filter requests method
+
 
         if(loggedInEmail == null) {
             redirectAttributes.addFlashAttribute("sessionError", "Session Expired");
@@ -46,6 +49,7 @@ public class DashboardController {
 
         return "dashboard";
     }
+
 
     @PostMapping("/dashboard")
     public String saveTimeOffRequest(HttpSession session, Model model, @RequestParam("timeType")String timeType, @RequestParam("requestDate") String requestDate, @RequestParam("requestHours") double requestHours, @RequestParam("occurrenceCount") double occurrenceCount, @RequestParam("approvalStatus") String approvalStatus) {

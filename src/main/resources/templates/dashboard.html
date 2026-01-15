@@ -113,7 +113,6 @@
         }
         a {
             text-decoration: none;
-            color: black;
             display: block;
         }
 
@@ -182,6 +181,8 @@
 <div class="container">
 <h1>Dashboard</h1>
     <h2>Balances</h2>
+    <a href="#">Manage</a>
+    <br>
     <div class="row d-flex justify-content-evenly">
 <div class="dataBox">
     <p>Occurrences</p>
@@ -189,11 +190,12 @@
 </div>
 <div class="dataBox">
     <p>PTO</p>
-    <div class="balanceNum" th:if="${appUser.getRemainingPtoBalance() != null}" th:text="${appUser.getRemainingPtoBalance()}"></div>
-    <div class="balanceNum" th:if="${appUser.getRemainingPtoBalance() == null}" th:text="${appUser.getYearlyAssignedPtoBalance()}"></div>
+    <span class="balanceNum" th:if="${appUser.getRemainingPtoBalance() != null}" th:text="${appUser.getRemainingPtoBalance()}"></span><span class="balanceNum">/</span><span th:text="${appUser.getYearlyAssignedPtoBalance()}"></span>
+        <div class="balanceNum" th:if="${appUser.getRemainingPtoBalance() == null}" th:text="${appUser.getYearlyAssignedPtoBalance()}"></div>
 </div>
         </div>
 </div>
+
 
 
 <div class="container">
@@ -207,6 +209,7 @@
 
 
     <div id="filterContainer">
+        <form method="get" th:action="@{/dashboard}">
     <p id="filterLabel">filter by: </p>
     <select class="selectFilter" name="typeFilter">
         <option value="" disabled selected>Type</option>
@@ -221,6 +224,7 @@
             <option value="AUTO_APPROVED">AUTO_APPROVED</option>
         </select>
         <button id="filterBtn" class="btn btn-dark" type="submit">Apply</button>
+        </form>
     </div>
 
     <div id="deletedReqMessageContainer">
@@ -269,7 +273,7 @@
                    <label>Time type</label>
                    <br>
                    <select id="timeTypeSelection" name="timeType">
-                       <option value="default">Choose a type</option>
+                       <option value="" disabled selected>Choose a type</option>
                        <option value="UNTIME">Unscheduled Time</option>
                        <option value="SCHTIME">Scheduled PTO</option>
                    </select>
@@ -286,9 +290,10 @@
                    <br>
                    <br>
                    <label>Occurrence Count</label>
+
                    <br>
                    <select id="occurrenceCount" name="occurrenceCount">
-                       <option value="default">#</option>
+                       <option value="" disabled selected>#</option>
                        <option value="0.0">0.0</option>
                        <option value="0.25">0.25</option>
                        <option value="0.5">0.5</option>

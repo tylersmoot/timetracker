@@ -8,6 +8,8 @@ import com.example.timetracker.repository.AppUserRepository;
 import com.example.timetracker.repository.TimeRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.sql.Time;
 import java.util.List;
 
 
@@ -31,6 +33,30 @@ public class TimeRequestService {
         timeRequestRepository.delete(timeRequest);
 
     }
+
+    // FIX ME
+    public void filterTimeRequest(String loggedInEmail, String timeType, String timeRequestStatus) {
+        AppUser appUser = appUserRepository.findByEmail(loggedInEmail);
+
+    }
+
+
+    public void cancelTimeRequest(int requestID, String loggedInEmail) {
+        TimeRequest timeRequest = timeRequestRepository.findById(requestID);
+        double reqHours = timeRequest.getRequestedHours();
+        double occCount = timeRequest.getOccurrenceCount();
+        AppUser appUser = appUserRepository.findByEmail(loggedInEmail);
+
+        double appUserRemainingBalance = appUser.getRemainingPtoBalance();
+        double updatedRemainingBalance = appUserRemainingBalance + reqHours;
+        double appUserOccBalance = appUser.getOccurrenceBalance();
+        double updatedOccBalance = appUserOccBalance + occCount;
+
+        appUser.setRemainingPtoBalance(updatedRemainingBalance);
+        appUser.setOccurrenceBalance(updatedOccBalance);
+        appUserRepository.save(appUser);
+    }
+
     public void updateTimeRequestStatusAndPto(TimeRequestStatus status, int requestID, String loggedInEmail) {
         TimeRequest timeRequest = timeRequestRepository.findById(requestID);
         timeRequest.setTimeRequestStatus(status);

@@ -46,6 +46,10 @@ public class TimeRequestDetailsController {
             redirectAttributes.addFlashAttribute("sessionError", "Session Expired");
             return "redirect:/login";
         }
+
+       if(TimeRequestStatus.CANCELLED == statusChange) {
+           timeRequestService.cancelTimeRequest(requestId, loggedInEmail);
+       }
         timeRequestService.updateTimeRequestStatusAndPto(statusChange, requestId, loggedInEmail);
         return "redirect:/request/" + requestId;
     }
