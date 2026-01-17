@@ -9,18 +9,18 @@ public class SignUpRequest {
     private Double remainingPtoBalance;
     private String email;
     private String passwordHash;
-    private String retypedPassword;
+
 
     public SignUpRequest () {};
 
-    public SignUpRequest(String firstName, String lastName, Double yearlyAssignedPtoBalance, Double remainingPtoBalance, String email, String passwordHash, String retypedPassword) {
+    public SignUpRequest(String firstName, String lastName, Double yearlyAssignedPtoBalance, Double remainingPtoBalance, String email, String passwordHash) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.yearlyAssignedPtoBalance = yearlyAssignedPtoBalance;
         this.remainingPtoBalance = remainingPtoBalance;
         this.email = email;
         this.passwordHash = passwordHash;
-        this.retypedPassword = retypedPassword;
+
 
     }
 
@@ -71,14 +71,5 @@ public class SignUpRequest {
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
-
-    public String getRetypePassword() {
-        return retypedPassword;
-    }
-
-    public void setRetypePassword(String retypePassword) {
-        this.retypedPassword = retypePassword;
-    }
-
 
 }

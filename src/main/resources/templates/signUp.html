@@ -14,7 +14,7 @@
             justify-content: end;
         }
         .mainBody {
-            height: 100%;
+            height: 100vh;
             padding: 5px 20px 5px 20px;
             background: #1E90FF;
             display: flex;
@@ -70,6 +70,10 @@
 
         #hiddenInputContainer {
             display: none;
+        }
+
+        small {
+            color: red;
         }
 
 
@@ -130,13 +134,10 @@
         <label>Email (username)</label>
         <br>
         <input type="email" name="email" class="emailInput">
-    <label>Choose a password</label>
+    <label>Choose password</label>
     <br>
     <input type="password" name="passwordHash" minlength="8" required>
     <br>
-    <label>Re-type password</label>
-    <br>
-    <input type="password" name="retypedPassword" minlength="8" required>
     </fieldset>
     <br>
     <br>

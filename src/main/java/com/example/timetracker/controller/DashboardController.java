@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.sql.Time;
 import java.util.List;
 
 
@@ -28,16 +30,27 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard")
-    public String showDashboardPage(HttpSession session, Model model, RedirectAttributes redirectAttributes, @RequestParam(required = false) String requestType, @RequestParam(required = false) String requestStatus) {
-        // FIX - SWITCH TO APP USER
+    public String showDashboardPage(HttpSession session, Model model, RedirectAttributes redirectAttributes, @RequestParam(required = false, name = "typeFilter") String requestType, @RequestParam(required = false, name="statusFilter") String requestStatus) {
+
         String loggedInEmail = (String) session.getAttribute("loggedInEmail");
 
-        // FIX ME - filter requests method
-
-
-        if(loggedInEmail == null) {
+        if(loggedInEmail == null || !loggedInEmail.isEmpty()) {
             redirectAttributes.addFlashAttribute("sessionError", "Session Expired");
             return "redirect:/login";
+        }
+
+        System.out.println("status" + requestStatus);
+        System.out.println("type: " + requestType);
+
+        // if type filter is not null or empty
+        if(requestType != null && !requestType.isEmpty()) {
+            System.out.println("type is not empty or null");
+            List<TimeRequest> results = timeRequestService.findByTimeTypeAndAppUser_Id(requestType, loggedInEmail);
+
+            // print results to console
+            for(TimeRequest request : results) {
+                System.out.println(request.getId());
+            }
         }
 
         AppUser appUser = appUserService.findByEmail(loggedInEmail);
@@ -54,7 +67,6 @@ public class DashboardController {
     @PostMapping("/dashboard")
     public String saveTimeOffRequest(HttpSession session, Model model, @RequestParam("timeType")String timeType, @RequestParam("requestDate") String requestDate, @RequestParam("requestHours") double requestHours, @RequestParam("occurrenceCount") double occurrenceCount, @RequestParam("approvalStatus") String approvalStatus) {
 
-        // FIX - SWITCH TO APP USER
         String loggedInEmail = (String) session.getAttribute("loggedInEmail");
         model.addAttribute("loggedInEmail", loggedInEmail);
 

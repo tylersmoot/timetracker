@@ -32,11 +32,18 @@ public class TimeRequestService {
 
     }
 
-    // FIX ME
-    public void filterTimeRequest(String loggedInEmail, String timeType, String timeRequestStatus) {
+   public List<TimeRequest> findByTimeTypeAndAppUser_Id(String type, String loggedInEmail) throws NullPointerException {
         AppUser appUser = appUserRepository.findByEmail(loggedInEmail);
+        int appUserId = appUser.getId();
 
-    }
+        // return empty list if type value is null or empty
+        if(type == null || type.isEmpty()) {
+           return List.of();
+        }
+
+        TimeType timeType = TimeType.valueOf(type);
+        return timeRequestRepository.findByTimeTypeAndAppUser_Id(timeType, appUserId);
+   }
 
 
     public void cancelTimeRequest(int requestID, String loggedInEmail) {
