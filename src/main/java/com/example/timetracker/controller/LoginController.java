@@ -1,7 +1,6 @@
 package com.example.timetracker.controller;
 
-import com.example.timetracker.model.AppUser;
-import com.example.timetracker.service.AppUserService;
+import com.example.timetracker.service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,12 +11,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class LoginController {
 
-
-    private final AppUserService appUserService;
+    private final LoginService loginService;
 
     @Autowired
-    public LoginController(AppUserService appUserService) {
-        this.appUserService = appUserService;
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
     }
 
     @GetMapping("/login")
@@ -28,14 +26,13 @@ public class LoginController {
     @PostMapping("/login")
     public String login(HttpSession session, RedirectAttributes redirectAttributes, @RequestParam("email") String email, @RequestParam("password") String password) {
         session.setAttribute("loggedInEmail", email);
-        AppUser appUser = appUserService.findByEmail(email);
-        boolean userVerified = appUserService.verifyPasswordAuth(session, redirectAttributes, password, appUser);
+        boolean userVerified = loginService.verifyLoginUser(email, session, redirectAttributes, password);
+
         if(!userVerified) {
             return "redirect:/login";
         }
 
         return "redirect:/dashboard";
     }
-
 
 }

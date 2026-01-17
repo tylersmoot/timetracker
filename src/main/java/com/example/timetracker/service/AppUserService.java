@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -17,7 +16,6 @@ public class AppUserService {
     private AppUserRepository appUserRepository;
 
     public AppUserService(){};
-
 
     public AppUser findByEmail(String email){
         return appUserRepository.findByEmail(email);
