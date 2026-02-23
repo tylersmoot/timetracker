@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.sql.Time;
 import java.util.List;
 
 
@@ -32,15 +30,15 @@ public class DashboardController {
     @GetMapping("/dashboard")
     public String showDashboardPage(HttpSession session, Model model, RedirectAttributes redirectAttributes, @RequestParam(required = false, name = "typeFilter") String requestType, @RequestParam(required = false, name="statusFilter") String requestStatus) {
 
+        // retrieve logged in email from session
         String loggedInEmail = (String) session.getAttribute("loggedInEmail");
 
-        if(loggedInEmail == null || !loggedInEmail.isEmpty()) {
+        // check for a null email
+        // if null, redirect to login page with session error message
+        if(loggedInEmail == null) {
             redirectAttributes.addFlashAttribute("sessionError", "Session Expired");
             return "redirect:/login";
         }
-
-        System.out.println("status" + requestStatus);
-        System.out.println("type: " + requestType);
 
         // if type filter is not null or empty
         if(requestType != null && !requestType.isEmpty()) {
